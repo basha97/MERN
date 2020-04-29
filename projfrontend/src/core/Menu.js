@@ -35,7 +35,7 @@ const Menu = ({ history }) => (
                 }
                 className = "nav-link"
                 to = "/user/dashboard" >
-                    Dashboard
+                    U. Dashboard
                 </Link>
             </li>
             <li className="nav-item">
@@ -44,7 +44,7 @@ const Menu = ({ history }) => (
                 }
                 className = "nav-link"
                 to = "/admin/dashboard" >
-                    A.Dashboard
+                    A. Dashboard
                 </Link>
             </li>
             {!isAuthenticated() && (
