@@ -22,10 +22,10 @@ const AdminDashboard = (props) =>  {
                         <Link to="/admin/create/product" className="nav-link text-success">Create Product</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/admin/products" className="nav-link text-success">Manage Orders</Link>
+                        <Link to="/admin/orders" className="nav-link text-success">Manage Orders</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link to="/admin/orders" className="nav-link text-success">Manage Products</Link>
+                        <Link to="/admin/products" className="nav-link text-success">Manage Products</Link>
                     </li>
                 </ul>
             </div>
