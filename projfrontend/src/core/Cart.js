@@ -4,6 +4,7 @@ import { API } from "../backend";
 import Base from './Base';
 import Card from './Card';
 import { loadCart } from './helper/CartHelper';
+import StripeCheckout from './StripeCheckout';
 
 
 function Cart() {
@@ -49,7 +50,12 @@ function Cart() {
       <Base title="Cart Page" description="Ready to checkout">
         <div className="row text-center">
         <div className="col-6">{loadAllProducts()}</div>
-        <div className="col-6">{loadCheckout()}</div>
+        <div className="col-6">
+            <StripeCheckout 
+                product={products}
+                setReload={setReload}
+            />
+        </div>
         </div> 
       </Base>
   );
