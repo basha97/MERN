@@ -52,7 +52,7 @@ function Cart() {
         <div className="col-6">{loadAllProducts()}</div>
         <div className="col-6">
             <StripeCheckout 
-                product={products}
+                products={products}
                 setReload={setReload}
             />
         </div>

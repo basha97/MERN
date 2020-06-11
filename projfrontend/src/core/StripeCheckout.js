@@ -2,7 +2,10 @@ import React, {useState, useEffect} from 'react';
 import { isAuthenticated } from '../auth/helper';
 import { cartEmpty, loadCart } from './helper/CartHelper';
 import { Link } from 'react-router-dom';
-
+import StripeCheckoutButton from "react-stripe-checkout";
+import { API } from '../backend';
+import { createOrder } from './helper/OrderHelpler';
+// createOrder
 
 const StripeCheckout = (
     { 
@@ -23,13 +26,58 @@ const StripeCheckout = (
     const userId = isAuthenticated() && isAuthenticated().user._id;
 
     const getFinalPrice = () => {
-        return products.reduce((cur,nxt) => cur + nxt.count * nxt,0);
-        
+       let amount = 0;
+       products.map(p=>{
+           amount = amount + p.price;
+       })    
+       return amount;
     }
+
+    const makePayment = (token) => {
+        console.log('make payments console => ', products)
+        const body = {
+            token,
+            products
+        }
+        const headers = {
+            "Content-Type": "application/json"
+        }
+        return fetch(`${API}/stripepayment`,{
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+            },
+            body: JSON.stringify(body)
+        }).then(res => {
+            console.log(res)
+        }).catch(err => console.log(err))
+    }
+
+    const showStripebutton = () => {
+        return isAuthenticated() ? (
+            <StripeCheckoutButton
+                stripeKey="pk_test_51GssGoIu1LJnFN2NLpdkIiQHsY0j34pI8YSvQ6HUxOvt23wke95yanuxjp3LWPFA7JonjXcI65UoPvb6whCDjMLn0070f4MDsm"
+                token={makePayment}
+                amount={getFinalPrice() * 100}
+                name="Buy Tshirts"
+                shippingAddress
+                billingAddress
+            >
+                <button className="btn btn-success">Pay With Stripe</button>
+            </StripeCheckoutButton>
+        ) : (
+            <Link to="/signin">
+                <button className="btn btn-warning">Signin</button>
+            </Link>
+        )
+    }
+
+    
 
     return (
         <div>
             <h3 className="text-white">Srtipe Checkout Loaded {getFinalPrice()}</h3>
+            {showStripebutton()}
         </div>
     );
 }
