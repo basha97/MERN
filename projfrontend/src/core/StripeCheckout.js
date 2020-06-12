@@ -34,6 +34,7 @@ const StripeCheckout = (
     }
 
     const makePayment = (token) => {
+        console.log(API);
         console.log('make payments console => ', products)
         const body = {
             token,
@@ -45,11 +46,13 @@ const StripeCheckout = (
         return fetch(`${API}/stripepayment`,{
             method: "POST",
             headers: {
-                Accept: "application/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify(body)
         }).then(res => {
-            console.log(res)
+            const {status} = res
+            console.log("STATUS ",status)
+            // cartEmpty();
         }).catch(err => console.log(err))
     }
 

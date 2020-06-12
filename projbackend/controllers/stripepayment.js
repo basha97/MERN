@@ -1,8 +1,11 @@
 const stripe = require("stripe")("sk_test_51GssGoIu1LJnFN2Nz6Chvsrk7vaBp38L6bgKdcI4WY2ZBf94QyQRqvQj6JJb2zWT1wPxWe3sES36DJezGqZ01Sjs00YCIvxToC")
 const uuid = require("uuid/v4")
 
-exports.makePayment = (res, req) => {
+exports.makePayment = (req, res) => {
+    console.log('The request of stripe route',req.body);
     const { products, token } = req.body
+    //const products = req.body.products
+    //const token = req.body.token
     console.log("PRODUCTS", products);
 
     let amount = 0;
