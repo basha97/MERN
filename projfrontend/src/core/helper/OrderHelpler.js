@@ -1,6 +1,7 @@
 import { API } from "../../backend";
 
 export const createOrder = (userId, token, orderData) => {
+    console.log('in create order function ', orderData)
     return fetch(`${API}/order/create/${userId}`,{
         method: "POST",
         headers: {
@@ -10,6 +11,7 @@ export const createOrder = (userId, token, orderData) => {
         },
         body: JSON.stringify({order: orderData})
     }).then(res => {
+        console.log('the response is ', res)
         return res.json();
     }).catch(
         err => console.log(err)

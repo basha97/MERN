@@ -2,6 +2,7 @@ const User = require("../models/user");
 const Order = require("../models/order");
 
 exports.getUserById = (req, res, next, id) => {
+  console.log("The user id is ",id)
   User.findById(id).exec((err, user) => {
     if (err || !user) {
       return res.status(400).json({

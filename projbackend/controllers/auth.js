@@ -76,7 +76,10 @@ exports.isSignedIn = expressJwt({
 
 //custom middlewares
 exports.isAuthenticated = (req, res, next) => {
+  console.log("The response of is authentication is ",req.auth)
+  //let checker =  req.auth  == req.auth._id;
   let checker = req.profile && req.auth && req.profile._id == req.auth._id;
+  console.log('the checker is ',checker)
   if (!checker) {
     return res.status(403).json({
       error: "ACCESS DENIED"
